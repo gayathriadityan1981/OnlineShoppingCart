@@ -16,7 +16,7 @@ public class CustomerFormValidator implements Validator {
     // This Validator support CustomerInfo class.
     @Override
     public boolean supports(Class<?> clazz) {
-        return clazz == CustomerInfo.class;
+        return clazz.equals(CustomerForm.class);
     }
  
     @Override
