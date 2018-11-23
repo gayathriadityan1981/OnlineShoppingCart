@@ -37,7 +37,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
  
         // ROLE_EMPLOYEE, ROLE_MANAGER
-        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);
+        GrantedAuthority authority = new SimpleGrantedAuthority(role);
  
         grantList.add(authority);
  
