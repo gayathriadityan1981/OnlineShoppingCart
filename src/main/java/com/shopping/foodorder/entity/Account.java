@@ -21,7 +21,7 @@ public class Account implements Serializable {
     private boolean active;
     private String userRole;
     @Id
-    @Column(name = "USERNAME", length = 20, nullable = false)
+    @Column(name = "USER_NAME", length = 20, nullable = false)
     public String getUserName() {
         return userName;
     }
@@ -30,7 +30,7 @@ public class Account implements Serializable {
         this.userName = userName;
     }
  
-    @Column(name = "PASSWORD", length = 20, nullable = false)
+    @Column(name = " ENCRYTED_PASSWORD", length = 20, nullable = false)
     public String getPassword() {
         return password;
     }
@@ -48,7 +48,7 @@ public class Account implements Serializable {
         this.active = active;
     }
  
-    @Column(name = "USERROLE", length = 20, nullable = false)
+    @Column(name = "USER_ROLE", length = 20, nullable = false)
     public String getUserRole() {
         return userRole;
     }
