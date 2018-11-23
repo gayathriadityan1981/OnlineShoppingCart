@@ -30,7 +30,7 @@ public class Product implements Serializable {
     }
  
     @Id
-    @Column(name = "PRODUCT_CODE", length = 20, nullable = false)
+    @Column(name = "CODE", length = 20, nullable = false)
     public String getCode() {
         return code;
     }
@@ -39,7 +39,7 @@ public class Product implements Serializable {
         this.code = code;
     }
  
-    @Column(name = "PRODUCT_NAME", length = 255, nullable = false)
+    @Column(name = "NAME", length = 255, nullable = false)
     public String getName() {
         return name;
     }
@@ -48,7 +48,7 @@ public class Product implements Serializable {
         this.name = name;
     }
  
-    @Column(name = "PRODUCT_PRICE", nullable = false)
+    @Column(name = "PRICE", nullable = false)
     public double getPrice() {
         return price;
     }
@@ -58,7 +58,7 @@ public class Product implements Serializable {
     }
  
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "PRODUCT_CREATE_DATE", nullable = false)
+    @Column(name = "CREATE_DATE", nullable = false)
     public Date getCreateDate() {
         return createDate;
     }
@@ -68,7 +68,7 @@ public class Product implements Serializable {
     }
  
     @Lob
-    @Column(name = "PRODUCT_IMAGE", length = Integer.MAX_VALUE, nullable = true)
+    @Column(name = "IMAGE", length = Integer.MAX_VALUE, nullable = true)
     public byte[] getImage() {
         return image;
     }
