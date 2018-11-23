@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.shopping.foodorder.form.ProductForm;
 import com.shopping.foodorder.form.CustomerForm;
 @Controller
 @Transactional
@@ -72,10 +71,9 @@ public class MainController {
  
    @RequestMapping("/")
    public String home() {
-      System.out.println("ctrl comes here");
       return "index";
    }
- 
+
    // Product List
    @RequestMapping({ "/productList" })
    public String listProductHandler(Model model, //
@@ -152,37 +150,44 @@ public class MainController {
       model.addAttribute("cartForm", myCart);
       return "shoppingCart";
    }
- 
+   @RequestMapping(value = { "/shoppingCartCustomer" }, method = RequestMethod.GET)
+   public String newShoppingCartCustomer(CustomerForm customerForm) {
+       return "shoppingCartCustomer";
+   }
+
+ /*
    // GET: Enter customer information.
    @RequestMapping(value = { "/shoppingCartCustomer" }, method = RequestMethod.GET)
    public String shoppingCartCustomerForm(HttpServletRequest request, Model model) {
  
       CartInfo cartInfo = Util.getCartInSession(request);
  
-      if (cartInfo.isEmpty()) {
+     if (cartInfo.isEmpty()) {
  
          return "redirect:/shoppingCart";
       }
       CustomerInfo customerInfo = cartInfo.getCustomerInfo();
- 
+      System.out.println("--------customerinfo-----"+customerInfo);
       CustomerForm customerForm = new CustomerForm(customerInfo);
  
       model.addAttribute("customerForm", customerForm);
  
       return "shoppingCartCustomer";
    }
- 
-   // POST: Save customer information.
+ */
+  //  POST: Save customer information.
    @RequestMapping(value = { "/shoppingCartCustomer" }, method = RequestMethod.POST)
    public String shoppingCartCustomerSave(HttpServletRequest request, //
          Model model, //
          @ModelAttribute("customerForm") @Validated CustomerForm customerForm, //
          BindingResult result, //
          final RedirectAttributes redirectAttributes) {
- 
+            System.out.println("--------redirectAttributes-----"+redirectAttributes);
+           System.out.println("--------result-----"+result);
       if (result.hasErrors()) {
          customerForm.setValid(false);
          // Forward to reenter customer info.
+        
          return "shoppingCartCustomer";
       }
  
