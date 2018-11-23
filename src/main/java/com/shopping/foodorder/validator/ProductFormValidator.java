@@ -2,46 +2,45 @@ package com.shopping.foodorder.validator;
  
 import com.shopping.foodorder.dao.ProductDAO;
 import com.shopping.foodorder.entity.Product;
-import com.shopping.foodorder.model.ProductInfo;
+import com.shopping.foodorder.form.ProductForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
  
-// @Component: As a Bean.
 @Component
 public class ProductFormValidator implements Validator {
  
-    @Autowired
-    private ProductDAO productDAO;
+   @Autowired
+   private ProductDAO productDAO;
  
-    // This Validator support ProductInfo class.
-    @Override
-    public boolean supports(Class<?> clazz) {
-        return clazz == ProductInfo.class;
-    }
+   // This validator only checks for the ProductForm.
+   @Override
+   public boolean supports(Class<?> clazz) {
+      return clazz == ProductForm.class;
+   }
  
-    @Override
-    public void validate(Object target, Errors errors) {
-        ProductInfo productInfo = (ProductInfo) target;
+   @Override
+   public void validate(Object target, Errors errors) {
+      ProductForm productForm = (ProductForm) target;
  
-        // Check the fields of ProductInfo class.
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "code", "NotEmpty.productForm.code");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.productForm.name");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "NotEmpty.productForm.price");
+      // Check the fields of ProductForm.
+      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "code", "NotEmpty.productForm.code");
+      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.productForm.name");
+      ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "NotEmpty.productForm.price");
  
-        String code = productInfo.getCode();
-        if (code != null && code.length() > 0) {
-            if (code.matches("\\s+")) {
-                errors.rejectValue("code", "Pattern.productForm.code");
-            } else if(productInfo.isNewProduct()) {
-                Product product = productDAO.findProduct(code);
-                if (product != null) {
-                    errors.rejectValue("code", "Duplicate.productForm.code");
-                }
+      String code = productForm.getCode();
+      if (code != null && code.length() > 0) {
+         if (code.matches("\\s+")) {
+            errors.rejectValue("code", "Pattern.productForm.code");
+         } else if (productForm.isNewProduct()) {
+            Product product = productDAO.findProduct(code);
+            if (product != null) {
+               errors.rejectValue("code", "Duplicate.productForm.code");
             }
-        }
-    }
+         }
+      }
+   }
  
 }
